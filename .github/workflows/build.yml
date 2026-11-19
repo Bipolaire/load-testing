@@ -72,7 +72,24 @@ jobs:
       - name: Générer le paquet (macOS)
         if: runner.os == 'macOS'
         shell: bash
-        run: cargo packager -c "$(python3 scripts/packager-config.py ${{ matrix.config }})"
+        run: |
+          set -euo pipefail
+          config="$(python3 scripts/packager-config.py ${{ matrix.config }})"
+          # hdiutil "Resource busy" is flaky on GitHub macOS runners (XProtect).
+          for attempt in 1 2 3 4 5; do
+            echo "==> cargo packager attempt ${attempt}/5"
+            while IFS= read -r disk; do
+              [ -n "$disk" ] || continue
+              hdiutil detach "$disk" -force || true
+            done < <(hdiutil info 2>/dev/null | awk -F': ' '/\/Volumes\/Load Testing/{print $1}')
+            rm -f dist/*.dmg
+            if cargo packager -c "$config"; then
+              exit 0
+            fi
+            sleep $((attempt * 5))
+          done
+          echo "cargo packager failed after 5 attempts" >&2
+          exit 1
 
       - name: Générer le paquet (Windows)
         if: runner.os == 'Windows'
