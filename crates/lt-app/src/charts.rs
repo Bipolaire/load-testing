@@ -7,6 +7,10 @@ use gpui::{Path, PathBuilder};
 
 const CHART_HEIGHT: f32 = 160.0;
 
+type ChartPath = Path<Pixels>;
+type BarSegments = Vec<(ChartPath, bool)>;
+type BarChartPaint = (BarSegments, Option<ChartPath>);
+
 /// `paint_path` attend des coordonnées fenêtre : on dessine en local puis on
 /// décale à l'origine du canvas.
 fn build_at(mut builder: PathBuilder, origin: Point<Pixels>) -> Option<Path<Pixels>> {
@@ -230,7 +234,7 @@ impl Bars {
 }
 
 impl IntoElement for Bars {
-    type Element = gpui::Canvas<(Vec<(Path<Pixels>, bool)>, Option<Path<Pixels>>)>;
+    type Element = gpui::Canvas<BarChartPaint>;
 
     fn into_element(self) -> Self::Element {
         let values = self.values;
@@ -278,7 +282,7 @@ impl IntoElement for Bars {
                 (paths, baseline)
             },
             move |_bounds,
-                  (paths, baseline): (Vec<(Path<Pixels>, bool)>, Option<Path<Pixels>>),
+                  (paths, baseline): BarChartPaint,
                   window: &mut Window,
                   _cx: &mut App| {
                 if let Some(baseline) = baseline {
