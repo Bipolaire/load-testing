@@ -429,6 +429,7 @@ impl PdfBuilder {
         self.polygon(&[(x, y), (x + w, y), (x + w, y + h), (x, y + h)], Some(color), None);
     }
 
+    #[allow(clippy::too_many_arguments)]
     fn round_rect(&mut self, x: f32, y: f32, w: f32, h: f32, r: f32, fill: Rgb3, stroke: Option<(Rgb3, f32)>) {
         self.polygon(&round_rect_points(x, y, w, h, r), Some(fill), stroke);
     }

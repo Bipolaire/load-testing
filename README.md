@@ -37,7 +37,7 @@ curl -fsSL https://raw.githubusercontent.com/Bipolaire/load-testing/develop/scri
 
 # Version épinglée
 curl -fsSL https://raw.githubusercontent.com/Bipolaire/load-testing/develop/scripts/install.sh \
-  | LT_VERSION=v0.1.1 sh
+  | LT_VERSION=v0.1.2 sh
 ```
 
 ```powershell
@@ -45,7 +45,7 @@ curl -fsSL https://raw.githubusercontent.com/Bipolaire/load-testing/develop/scri
 irm https://raw.githubusercontent.com/Bipolaire/load-testing/develop/scripts/install.ps1 | iex
 
 # Version épinglée
-$env:LT_VERSION = 'v0.1.1'
+$env:LT_VERSION = 'v0.1.2'
 irm https://raw.githubusercontent.com/Bipolaire/load-testing/develop/scripts/install.ps1 | iex
 ```
 
