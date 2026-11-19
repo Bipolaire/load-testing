@@ -1114,7 +1114,10 @@ mod tests {
         assert!(run_dir.join("executive.pdf").is_file());
         assert!(run_dir.join("summary.json").is_file());
         assert!(run_dir.join("series.json").is_file());
-        assert_eq!(workspace.report_files(&run.name), files);
+        // report_files() returns lexicographically sorted paths.
+        let mut expected = files.clone();
+        expected.sort();
+        assert_eq!(workspace.report_files(&run.name), expected);
         let _ = std::fs::remove_dir_all(dir);
     }
 

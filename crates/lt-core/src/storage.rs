@@ -480,15 +480,19 @@ pub fn default_workspace() -> PathBuf {
         .join("Load Testing")
 }
 
-/// If the current directory looks like a workspace (`data/tests.json`), return it.
-/// Used by the CLI so `cd /opt/load-tests && lt list` works without `LT_WORKSPACE`.
-pub fn workspace_from_cwd() -> Option<PathBuf> {
-    let cwd = std::env::current_dir().ok()?;
-    if cwd.join("data").join("tests.json").is_file() {
-        Some(cwd)
+/// If `dir` looks like a workspace (`data/tests.json`), return it.
+pub fn workspace_if_present(dir: &Path) -> Option<PathBuf> {
+    if dir.join("data").join("tests.json").is_file() {
+        Some(dir.to_path_buf())
     } else {
         None
     }
+}
+
+/// If the current directory looks like a workspace (`data/tests.json`), return it.
+/// Used by the CLI so `cd /opt/load-tests && lt list` works without `LT_WORKSPACE`.
+pub fn workspace_from_cwd() -> Option<PathBuf> {
+    workspace_if_present(&std::env::current_dir().ok()?)
 }
 
 pub fn all_folders(workspace: &Workspace) -> Vec<String> {
@@ -532,15 +536,12 @@ mod tests {
     }
 
     #[test]
-    fn workspace_from_cwd_detects_tests_json() {
+    fn workspace_if_present_detects_tests_json() {
         let dir = std::env::temp_dir().join(format!("lt-cwd-{}", new_id()));
         fs::create_dir_all(dir.join("data")).unwrap();
         fs::write(dir.join("data").join("tests.json"), "[]").unwrap();
-        let previous = std::env::current_dir().unwrap();
-        std::env::set_current_dir(&dir).unwrap();
-        let detected = workspace_from_cwd();
-        let _ = std::env::set_current_dir(previous);
-        assert_eq!(detected.as_ref(), Some(&dir));
+        assert_eq!(workspace_if_present(&dir).as_ref(), Some(&dir));
+        assert!(workspace_if_present(Path::new("/nonexistent-lt-workspace")).is_none());
         let _ = fs::remove_dir_all(&dir);
     }
 

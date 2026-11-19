@@ -29,38 +29,25 @@ Le binaire **`lt`** s’installe seul (sans GUI) sur Linux, Windows Server et ma
 
 ### One-liner
 
-Le dépôt est **privé** : il faut un token GitHub (`repo`) et une **Release** (`v*`) contenant les archives `lt-v*`.
+Nécessite une **Release** GitHub (`v*`) avec les archives `lt-v*`.
 
 ```bash
-# Linux / macOS — créer un PAT puis :
-export GITHUB_TOKEN=ghp_xxx   # ou fine-grained avec Contents: Read
-
-# Récupère le script via l’API (raw.githubusercontent.com renvoie 404 sans auth)
-curl -fsSL \
-  -H "Authorization: Bearer $GITHUB_TOKEN" \
-  -H "Accept: application/vnd.github.raw" \
-  "https://api.github.com/repos/Bipolaire/load-testing/contents/scripts/install.sh?ref=develop" \
-  | sh
+# Linux / macOS → /usr/local/bin ou ~/.local/bin
+curl -fsSL https://raw.githubusercontent.com/Bipolaire/load-testing/develop/scripts/install.sh | sh
 
 # Version épinglée
-curl -fsSL \
-  -H "Authorization: Bearer $GITHUB_TOKEN" \
-  -H "Accept: application/vnd.github.raw" \
-  "https://api.github.com/repos/Bipolaire/load-testing/contents/scripts/install.sh?ref=develop" \
-  | LT_VERSION=v0.1.0 sh
+curl -fsSL https://raw.githubusercontent.com/Bipolaire/load-testing/develop/scripts/install.sh \
+  | LT_VERSION=v0.1.1 sh
 ```
 
 ```powershell
-# Windows
-$env:GITHUB_TOKEN = 'ghp_xxx'
-$headers = @{
-  Authorization = "Bearer $env:GITHUB_TOKEN"
-  Accept = 'application/vnd.github.raw'
-}
-irm "https://api.github.com/repos/Bipolaire/load-testing/contents/scripts/install.ps1?ref=develop" -Headers $headers | iex
-```
+# Windows → %LOCALAPPDATA%\lt\bin (+ PATH utilisateur)
+irm https://raw.githubusercontent.com/Bipolaire/load-testing/develop/scripts/install.ps1 | iex
 
-Sans token : clonez le dépôt (SSH/HTTPS authentifié) puis `./scripts/install.sh` (toujours avec `GITHUB_TOKEN` pour télécharger la Release).
+# Version épinglée
+$env:LT_VERSION = 'v0.1.1'
+irm https://raw.githubusercontent.com/Bipolaire/load-testing/develop/scripts/install.ps1 | iex
+```
 
 ### Archive manuelle
 
