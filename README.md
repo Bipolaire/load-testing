@@ -15,6 +15,65 @@ Les scénarios, authentifications et historiques vivent dans un **workspace** (d
 - macOS 13+ ou Windows 10+ pour l’app graphique
 - Python 3 (uniquement pour générer les configs `cargo-packager`)
 
+## Installation serveur (CLI)
+
+Le binaire **`lt`** s’installe seul (sans GUI) sur Linux, Windows Server et macOS. Les Releases GitHub publient des archives CLI pour :
+
+| Cible | Archive |
+|---|---|
+| Linux x86_64 (statique musl) | `lt-v*-x86_64-unknown-linux-musl.tar.gz` |
+| Linux ARM64 (statique musl) | `lt-v*-aarch64-unknown-linux-musl.tar.gz` |
+| Windows x64 | `lt-v*-x86_64-pc-windows-msvc.zip` |
+| macOS Apple Silicon | `lt-v*-aarch64-apple-darwin.tar.gz` |
+| macOS Intel | `lt-v*-x86_64-apple-darwin.tar.gz` |
+
+### One-liner
+
+```bash
+# Linux / macOS → /usr/local/bin ou ~/.local/bin
+curl -fsSL https://raw.githubusercontent.com/Bipolaire/load-testing/develop/scripts/install.sh | sh
+
+# Version épinglée
+curl -fsSL https://raw.githubusercontent.com/Bipolaire/load-testing/develop/scripts/install.sh \
+  | LT_VERSION=v0.1.0 sh
+```
+
+```powershell
+# Windows → %LOCALAPPDATA%\lt\bin (+ PATH utilisateur)
+irm https://raw.githubusercontent.com/Bipolaire/load-testing/develop/scripts/install.ps1 | iex
+
+# Version épinglée
+$env:LT_VERSION = 'v0.1.0'
+irm https://raw.githubusercontent.com/Bipolaire/load-testing/develop/scripts/install.ps1 | iex
+```
+
+### Archive manuelle
+
+1. Téléchargez l’archive + `SHA256SUMS` depuis la Release.
+2. Extrayez `lt` / `lt.exe` et placez-le dans un répertoire du `PATH`.
+
+```bash
+tar -xzf lt-v0.1.0-x86_64-unknown-linux-musl.tar.gz
+sudo install -m 755 lt /usr/local/bin/lt
+lt --version
+```
+
+### Workspace sur serveur
+
+```bash
+# Option A — variable d’environnement
+export LT_WORKSPACE=/opt/load-tests
+lt list
+lt run -s "Mon API" -p smoke
+
+# Option B — se placer dans le workspace (dossier contenant data/tests.json)
+cd /opt/load-tests
+lt list
+lt where
+```
+
+Copiez le workspace (scénarios + auth) depuis la machine où vous les avez conçus dans l’app, ou importez un ancien projet : `lt import /chemin/ancien --force`.
+
 ## Lancer en développement
 
 ```bash
@@ -127,13 +186,22 @@ cargo clippy -p lt-core -p lt-engine -p lt-cli -p lt-app --all-targets -- -D war
 # Build release (cible locale)
 cargo build --release -p lt-app -p lt-cli
 
+# Archive CLI seule (même layout que les Releases)
+./scripts/package-cli.sh
+# → dist/cli/lt-v<version>-<target>.tar.gz (+ .sha256)
+
 # Paquet macOS / Windows via cargo-packager
 cargo install cargo-packager --locked --version 0.11.8   # une fois
 cargo packager -c "$(python3 scripts/packager-config.py macos-arm64)"
 # → dist/Load Testing.app et dist/*.dmg (ou .exe sous Windows)
 ```
 
-La CI GitHub Actions (`.github/workflows/build.yml`) teste, compile et publie les artefacts macOS ARM64, macOS Intel et Windows x64 ; un tag `v*` ouvre une release draft.
+La CI GitHub Actions (`.github/workflows/build.yml`) :
+
+- teste `lt-core` / `lt-engine` / `lt-cli` ;
+- packague l’app GUI (macOS ARM/Intel, Windows x64) ;
+- packague la CLI seule (Linux musl x64/ARM64, macOS ARM/Intel, Windows x64) ;
+- sur un tag `v*`, ouvre une release draft avec DMG/NSIS + archives `lt-v*` + `SHA256SUMS`.
 
 ## Migration depuis l’ancienne stack Node/k6
 

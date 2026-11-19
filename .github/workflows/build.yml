@@ -102,27 +102,27 @@ jobs:
             os: ubuntu-latest
             target: x86_64-unknown-linux-musl
             archive: tar.gz
-            zig: false
+            musl: true
           - name: Linux ARM64 musl
-            os: ubuntu-latest
+            os: ubuntu-24.04-arm
             target: aarch64-unknown-linux-musl
             archive: tar.gz
-            zig: true
+            musl: true
           - name: macOS ARM64
             os: macos-14
             target: aarch64-apple-darwin
             archive: tar.gz
-            zig: false
+            musl: false
           - name: macOS Intel
             os: macos-14
             target: x86_64-apple-darwin
             archive: tar.gz
-            zig: false
+            musl: false
           - name: Windows x64
             os: windows-latest
             target: x86_64-pc-windows-msvc
             archive: zip
-            zig: false
+            musl: false
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v4
@@ -135,31 +135,17 @@ jobs:
         with:
           key: cli-${{ matrix.target }}
 
-      - name: Installer musl (Linux x64)
-        if: matrix.target == 'x86_64-unknown-linux-musl'
+      - name: Installer musl
+        if: matrix.musl
         run: |
           sudo apt-get update
           sudo apt-get install -y musl-tools
 
-      - name: Installer Zig (cross musl ARM64)
-        if: matrix.zig
-        uses: mlugg/setup-zig@v1
-        with:
-          version: 0.13.0
-
-      - name: Installer cargo-zigbuild
-        if: matrix.zig
-        run: cargo install cargo-zigbuild --locked --version 0.19.8
-
-      - name: Compiler lt (zigbuild)
-        if: matrix.zig
-        run: cargo zigbuild --release --target ${{ matrix.target }} -p lt-cli
-
       - name: Compiler lt
-        if: ${{ !matrix.zig }}
         run: cargo build --release --target ${{ matrix.target }} -p lt-cli
 
-      - name: Empaqueter l'archive CLI
+      - name: Empaqueter l'archive CLI (Unix)
+        if: runner.os != 'Windows'
         shell: bash
         run: |
           set -euo pipefail
@@ -173,25 +159,11 @@ jobs:
           OUT_DIR="dist/cli"
           mkdir -p "$OUT_DIR"
           STAGING="$(mktemp -d)"
-          if [[ "$TARGET" == *windows* ]]; then
-            BIN="target/${TARGET}/release/lt.exe"
-            cp "$BIN" "$STAGING/lt.exe"
-            ARCHIVE="lt-v${VERSION}-${TARGET}.zip"
-            (
-              cd "$STAGING"
-              if command -v zip >/dev/null 2>&1; then
-                zip -q "$OLDPWD/$OUT_DIR/$ARCHIVE" lt.exe
-              else
-                powershell -NoProfile -Command "Compress-Archive -Path lt.exe -DestinationPath '$OLDPWD/$OUT_DIR/$ARCHIVE'"
-              fi
-            )
-          else
-            BIN="target/${TARGET}/release/lt"
-            cp "$BIN" "$STAGING/lt"
-            chmod +x "$STAGING/lt"
-            ARCHIVE="lt-v${VERSION}-${TARGET}.tar.gz"
-            tar -C "$STAGING" -czf "$OUT_DIR/$ARCHIVE" lt
-          fi
+          BIN="target/${TARGET}/release/lt"
+          cp "$BIN" "$STAGING/lt"
+          chmod +x "$STAGING/lt"
+          ARCHIVE="lt-v${VERSION}-${TARGET}.tar.gz"
+          tar -C "$STAGING" -czf "$OUT_DIR/$ARCHIVE" lt
           (
             cd "$OUT_DIR"
             if command -v sha256sum >/dev/null 2>&1; then
@@ -202,6 +174,30 @@ jobs:
           )
           echo "Built $OUT_DIR/$ARCHIVE"
           ls -la "$OUT_DIR"
+
+      - name: Empaqueter l'archive CLI (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $version = $env:GITHUB_REF_NAME
+          if (-not $version -or -not $version.StartsWith('v')) { $version = '0.1.0' }
+          $version = $version.TrimStart('v')
+          $target = '${{ matrix.target }}'
+          $outDir = 'dist/cli'
+          New-Item -ItemType Directory -Path $outDir -Force | Out-Null
+          $bin = "target/$target/release/lt.exe"
+          if (-not (Test-Path $bin)) { throw "missing $bin" }
+          $staging = Join-Path $env:TEMP ("lt-cli-" + [guid]::NewGuid().ToString('N'))
+          New-Item -ItemType Directory -Path $staging | Out-Null
+          Copy-Item $bin (Join-Path $staging 'lt.exe')
+          $archive = "lt-v$version-$target.zip"
+          $archivePath = Join-Path (Resolve-Path $outDir) $archive
+          Compress-Archive -Path (Join-Path $staging 'lt.exe') -DestinationPath $archivePath -Force
+          $hash = (Get-FileHash -Algorithm SHA256 -Path $archivePath).Hash.ToLowerInvariant()
+          Set-Content -Path "$archivePath.sha256" -Value "$hash  $archive`n" -NoNewline
+          Write-Host "Built $archivePath"
+          Get-ChildItem $outDir
 
       - name: Publier les artefacts CLI
         uses: actions/upload-artifact@v4
