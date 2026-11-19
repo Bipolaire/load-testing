@@ -1,16 +1,17 @@
 #!/usr/bin/env sh
 # Install the `lt` CLI from GitHub Releases.
 #
-# Usage:
-#   curl -fsSL https://raw.githubusercontent.com/<owner>/<repo>/main/scripts/install.sh | sh
-#   curl -fsSL ... | LT_VERSION=v0.1.0 sh
-#   curl -fsSL ... | LT_REPO=myorg/load-testing sh
+# Usage (private repo — GITHUB_TOKEN required):
+#   curl -fsSL -H "Authorization: Bearer $GITHUB_TOKEN" \
+#     -H "Accept: application/vnd.github.raw" \
+#     "https://api.github.com/repos/Bipolaire/load-testing/contents/scripts/install.sh?ref=develop" | sh
 #
 # Env:
-#   LT_REPO      owner/repo (required unless DEFAULT_REPO is set below)
-#   LT_VERSION   tag (e.g. v0.1.0); default: latest release
+#   GITHUB_TOKEN    PAT with repo/contents read (required for private Releases)
+#   LT_REPO         owner/repo (default: Bipolaire/load-testing)
+#   LT_VERSION      tag (e.g. v0.1.0); default: latest release
 #   LT_INSTALL_DIR  install directory (default: /usr/local/bin or ~/.local/bin)
-#   LT_FORCE     set to 1 to overwrite an existing binary
+#   LT_FORCE        set to 1 to overwrite an existing binary
 
 set -eu
 
@@ -27,6 +28,7 @@ need_cmd() {
 
 REPO="${LT_REPO:-${GITHUB_REPOSITORY:-$DEFAULT_REPO}}"
 [ -n "$REPO" ] || die "set LT_REPO=owner/repo (GitHub repository that hosts Releases)"
+[ -n "${GITHUB_TOKEN:-}" ] || warn "GITHUB_TOKEN unset — private repos/releases will 404"
 
 need_cmd curl
 need_cmd uname
@@ -91,9 +93,11 @@ TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT INT TERM
 
 info "Downloading ${ARCHIVE}"
-curl -fsSL ${GITHUB_TOKEN:+-H "Authorization: Bearer $GITHUB_TOKEN"} \
-  -o "${TMP}/${ARCHIVE}" "$DOWNLOAD_URL" \
-  || die "download failed: ${DOWNLOAD_URL}"
+if ! curl -fsSL ${GITHUB_TOKEN:+-H "Authorization: Bearer $GITHUB_TOKEN"} \
+  -o "${TMP}/${ARCHIVE}" "$DOWNLOAD_URL"; then
+  die "download failed: ${DOWNLOAD_URL}
+hint: private repo needs GITHUB_TOKEN; also ensure a Release tag exists with CLI assets (push tag v0.1.0)"
+fi
 
 if curl -fsSL ${GITHUB_TOKEN:+-H "Authorization: Bearer $GITHUB_TOKEN"} \
   -o "${TMP}/SHA256SUMS" "$CHECKSUM_URL" 2>/dev/null; then
