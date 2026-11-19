@@ -1,0 +1,63 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/lt-core",
+    "crates/lt-engine",
+    "crates/lt-cli",
+    "crates/lt-app",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+authors = ["Load Testing"]
+repository = ""
+
+[workspace.dependencies]
+anyhow = "1"
+async-trait = "0.1"
+base64 = "0.22"
+chrono = { version = "0.4", features = ["serde"] }
+clap = { version = "4", features = ["derive", "env"] }
+directories = "6"
+futures = "0.3"
+hdrhistogram = "7"
+percent-encoding = "2"
+parking_lot = "0.12"
+printpdf = "0.12"
+quick-xml = "0.37"
+regex = "1"
+reqwest = { version = "0.12", default-features = false, features = [
+    "rustls-tls",
+    "http2",
+    "cookies",
+    "json",
+    "gzip",
+] }
+rfd = "0.15"
+rust-i18n = "3"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+tokio = { version = "1", features = [
+    "rt-multi-thread",
+    "macros",
+    "time",
+    "sync",
+    "signal",
+] }
+tokio-util = "0.7"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+unicode-normalization = "0.1"
+url = "2"
+
+lt-core = { path = "crates/lt-core" }
+lt-engine = { path = "crates/lt-engine" }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+strip = true

@@ -1,0 +1,19 @@
+# Build
+/target/
+/dist/
+
+# Workspace runtime (secrets & historique local)
+.env
+data/auth.json
+data/runs/
+data/runs.json
+
+# Rapports générés
+reports/*
+!reports/.gitkeep
+
+# Divers
+node_modules/
+.DS_Store
+*.swp
+*~

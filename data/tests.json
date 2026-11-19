@@ -1,0 +1,461 @@
+[
+  {
+    "id": "bundles-info",
+    "name": "Consultation des forfaits",
+    "description": "GET bundles-info-retrierver (lecture seule)",
+    "baseUrl": "https://prep-mob-web-api.togocom.tg",
+    "authId": "togocom-prep",
+    "dangerous": false,
+    "thinkTime": 1,
+    "variables": [
+      {
+        "name": "msisdn",
+        "values": [
+          "22872214904"
+        ]
+      }
+    ],
+    "thresholds": {
+      "p95": 1000,
+      "p99": 2000,
+      "errorRate": 0.01,
+      "checksRate": 0.99
+    },
+    "steps": [
+      {
+        "name": "bundles-info",
+        "method": "GET",
+        "path": "/telco-super-app/bundles-info-retrierver/v1/{{msisdn}}",
+        "headers": [],
+        "body": "",
+        "expectedStatus": "200",
+        "p95": null,
+        "checks": [
+          {
+            "path": "status.code",
+            "op": "equals",
+            "value": "200"
+          },
+          {
+            "path": "status.message",
+            "op": "equals",
+            "value": "SUCCESS"
+          },
+          {
+            "path": "data.bundles.total.mainBalance",
+            "op": "isNumber",
+            "value": ""
+          },
+          {
+            "path": "data.bundles.details",
+            "op": "isArray",
+            "value": ""
+          }
+        ],
+        "extract": []
+      }
+    ],
+    "folder": ""
+  },
+  {
+    "id": "subscriber-offer",
+    "name": "Souscription forfait NET100",
+    "description": "POST subscriber-offer : achète réellement un forfait",
+    "baseUrl": "https://prep-mob-web-api.togocom.tg",
+    "authId": "togocom-prep",
+    "dangerous": true,
+    "thinkTime": 1,
+    "variables": [
+      {
+        "name": "msisdn",
+        "values": [
+          "93475505"
+        ]
+      }
+    ],
+    "thresholds": {
+      "p95": 2000,
+      "p99": 4000,
+      "errorRate": 0.01,
+      "checksRate": 0.99
+    },
+    "steps": [
+      {
+        "name": "subscriber-offer",
+        "method": "POST",
+        "path": "/telco-super-app/subscriber-offer/v1",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": "{\n  \"initiatormsisdn\": \"{{msisdn}}\",\n  \"amount\": \"100\",\n  \"bundle\": \"NET100\",\n  \"beneficiarymsisdn\": \"{{msisdn}}\",\n  \"manualdebitairtime\": \"false\",\n  \"typeBundle\": \"data\"\n}",
+        "expectedStatus": "200",
+        "p95": null,
+        "checks": [
+          {
+            "path": "status.code",
+            "op": "equals",
+            "value": "200"
+          }
+        ],
+        "extract": []
+      }
+    ],
+    "folder": ""
+  },
+  {
+    "id": "demo-quickpizza",
+    "name": "Démo k6 (QuickPizza)",
+    "description": "API publique de démonstration de k6",
+    "baseUrl": "https://quickpizza.grafana.com",
+    "authId": "",
+    "dangerous": false,
+    "thinkTime": 1,
+    "variables": [],
+    "thresholds": {
+      "p95": 500,
+      "p99": 1000,
+      "errorRate": 0.01,
+      "checksRate": 0.99
+    },
+    "steps": [
+      {
+        "name": "home",
+        "method": "GET",
+        "path": "/",
+        "headers": [],
+        "body": "",
+        "expectedStatus": "200",
+        "p95": null,
+        "checks": [],
+        "extract": []
+      }
+    ],
+    "folder": ""
+  },
+  {
+    "id": "mw9fr0bzcch1",
+    "name": "payment-info-v2",
+    "description": "",
+    "baseUrl": "https://prep-int-api.togocom.tg",
+    "authId": "togocom-prep",
+    "dangerous": false,
+    "thinkTime": 1,
+    "variables": [],
+    "thresholds": {
+      "p95": 1000,
+      "p99": 2000,
+      "errorRate": 0.01,
+      "checksRate": 0.99
+    },
+    "steps": [
+      {
+        "name": "payment-info-v2",
+        "method": "POST",
+        "path": "/bill-payments/v2/payment-info-v2",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": "{\n  \"type\": \"PREAUTH\",\n  \"mode\": \"REF_LIST\",\n  \"nodeId\": \"0304\",\n  \"billerAlias\": \"01419\",\n  \"clientAliasType\": \"msisdn\",\n  \"clientAlias\": \"29999356\",\n  \"billReference\": \"29999356\",\n  \"billAmount\": null\n}",
+        "expectedStatus": "200",
+        "p95": null,
+        "checks": [],
+        "extract": [],
+        "stopOnFailure": false
+      }
+    ],
+    "folder": ""
+  },
+  {
+    "id": "mw9wzyas6zod",
+    "name": "Prod WSO 2 - payment-info-v2",
+    "description": "",
+    "baseUrl": "https://int-api.togocom.tg",
+    "authId": "mw9wyrkmounw",
+    "dangerous": false,
+    "thinkTime": 1,
+    "variables": [],
+    "thresholds": {
+      "p95": 1000,
+      "p99": 2000,
+      "errorRate": 0.01,
+      "checksRate": 0.99
+    },
+    "steps": [
+      {
+        "name": "payment-info-v2",
+        "method": "POST",
+        "path": "/bill-payments/v2/payment-info-v2",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": "{\n  \"type\": \"PREAUTH\",\n  \"mode\": \"REF_LIST\",\n  \"nodeId\": \"0304\",\n  \"billerAlias\": \"01419\",\n  \"clientAliasType\": \"msisdn\",\n  \"clientAlias\": \"29999402\",\n  \"billReference\": \"29999256;GP-Silver-Pr;15000;CP\",\n  \"billAmount\": null\n}",
+        "expectedStatus": "200",
+        "p95": null,
+        "checks": [],
+        "extract": [],
+        "stopOnFailure": false
+      }
+    ],
+    "folder": ""
+  },
+  {
+    "id": "mw9xywx55oj7",
+    "name": "Kube - subscribeoffer",
+    "description": "",
+    "baseUrl": "https://apps.togocom.tg",
+    "authId": "",
+    "dangerous": false,
+    "thinkTime": 1,
+    "variables": [],
+    "thresholds": {
+      "p95": 1000,
+      "p99": 2000,
+      "errorRate": 0.01,
+      "checksRate": 0.99
+    },
+    "steps": [
+      {
+        "name": "subscribeoffer",
+        "method": "POST",
+        "path": "/bundle-subscription/subscribeoffer",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": "{\n  \"initiatormsisdn\": \"70210044\",\n  \"amount\": \"100\",\n  \"bundle\": \"NET100\",\n  \"beneficiarymsisdn\": \"70210045\",\n  \"manualdebitairtime\": false,\n  \"typeBundle\": \"data\"\n}",
+        "expectedStatus": "201",
+        "p95": null,
+        "checks": [],
+        "extract": [],
+        "stopOnFailure": false
+      }
+    ],
+    "folder": ""
+  },
+  {
+    "id": "mw9yb5s03cxu",
+    "name": "Kube - payment-info-v2",
+    "description": "",
+    "baseUrl": "http://10.228.13.37:8290",
+    "authId": "",
+    "dangerous": false,
+    "thinkTime": 1,
+    "variables": [],
+    "thresholds": {
+      "p95": 1000,
+      "p99": 2000,
+      "errorRate": 0.01,
+      "checksRate": 0.99
+    },
+    "steps": [
+      {
+        "name": "payment-info-v2",
+        "method": "POST",
+        "path": "/bill-payments/v2/payment-info-v2",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": "{\n  \"type\": \"PREAUTH\",\n  \"mode\": \"REF_LIST\",\n  \"nodeId\": \"0304\",\n  \"billerAlias\": \"01419\",\n  \"clientAliasType\": \"msisdn\",\n  \"clientAlias\": \"29999402\",\n  \"billReference\": \"29999256;GP-Silver-Pr;15000;CP\",\n  \"billAmount\": null\n}",
+        "expectedStatus": "200",
+        "p95": null,
+        "checks": [],
+        "extract": [],
+        "stopOnFailure": false
+      }
+    ],
+    "folder": ""
+  },
+  {
+    "id": "mw9yl25kezvh",
+    "name": "Prod WSO2 - subscriber",
+    "description": "",
+    "baseUrl": "https://int-api.togocom.tg",
+    "authId": "mw9wyrkmounw",
+    "dangerous": false,
+    "thinkTime": 1,
+    "variables": [],
+    "thresholds": {
+      "p95": 1000,
+      "p99": 2000,
+      "errorRate": 0.01,
+      "checksRate": 0.99
+    },
+    "steps": [
+      {
+        "name": "V1",
+        "method": "POST",
+        "path": "/telco-super-app/bundlesubscription/V1",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": "{\n  \"initiatormsisdn\": \"70210044\",\n  \"amount\": \"250\",\n  \"bundle\": \"NET250\",\n  \"beneficiarymsisdn\": \"70210045\",\n  \"manualdebitairtime\": false,\n  \"typeBundle\": \"data\"\n}",
+        "expectedStatus": "201",
+        "p95": null,
+        "checks": [],
+        "extract": [],
+        "stopOnFailure": false
+      }
+    ],
+    "folder": ""
+  },
+  {
+    "name": "Démo SOAP – calculatrice",
+    "description": "Service SOAP public (dneonline) : Add (SOAP 1.1) puis Multiply (SOAP 1.2) avec le résultat",
+    "baseUrl": "http://www.dneonline.com",
+    "authId": "",
+    "dangerous": false,
+    "thinkTime": 1,
+    "variables": [
+      {
+        "name": "a",
+        "values": [
+          "5",
+          "10",
+          "20"
+        ]
+      }
+    ],
+    "thresholds": {
+      "p95": 2000,
+      "p99": 3000,
+      "errorRate": 0.01,
+      "checksRate": 0.99
+    },
+    "steps": [
+      {
+        "name": "Add",
+        "type": "soap",
+        "soapVersion": "1.1",
+        "soapAction": "http://tempuri.org/Add",
+        "method": "POST",
+        "path": "/calculator.asmx",
+        "expectedStatus": "200",
+        "headers": [],
+        "p95": null,
+        "stopOnFailure": true,
+        "body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Add xmlns=\"http://tempuri.org/\">\n      <intA>{{a}}</intA>\n      <intB>7</intB>\n    </Add>\n  </soap:Body>\n</soap:Envelope>",
+        "checks": [
+          {
+            "path": "Envelope.Body.AddResponse.AddResult",
+            "op": "notEmpty",
+            "value": ""
+          }
+        ],
+        "extract": [
+          {
+            "name": "somme",
+            "path": "Envelope.Body.AddResponse.AddResult"
+          }
+        ]
+      },
+      {
+        "name": "Multiply",
+        "type": "soap",
+        "soapVersion": "1.2",
+        "soapAction": "http://tempuri.org/Multiply",
+        "method": "POST",
+        "path": "/calculator.asmx",
+        "expectedStatus": "200",
+        "headers": [],
+        "p95": null,
+        "stopOnFailure": false,
+        "body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap12:Envelope xmlns:soap12=\"http://www.w3.org/2003/05/soap-envelope\">\n  <soap12:Body>\n    <Multiply xmlns=\"http://tempuri.org/\">\n      <intA>{{somme}}</intA>\n      <intB>2</intB>\n    </Multiply>\n  </soap12:Body>\n</soap12:Envelope>",
+        "checks": [
+          {
+            "path": "Envelope.Body.MultiplyResponse.MultiplyResult",
+            "op": "greaterThan",
+            "value": "0"
+          }
+        ],
+        "extract": []
+      }
+    ],
+    "id": "mwdsnxu3zew0",
+    "folder": ""
+  },
+  {
+    "id": "mwm6vedu2w0e",
+    "name": "APIM Version",
+    "folder": "Surepay Info Retriever",
+    "description": "",
+    "baseUrl": "https://mob-web-api.togocom.tg",
+    "authId": "mw9wyrkmounw",
+    "dangerous": false,
+    "thinkTime": 1,
+    "variables": [],
+    "thresholds": {
+      "p95": 1000,
+      "p99": 2000,
+      "errorRate": 0.01,
+      "checksRate": 0.99
+    },
+    "steps": [
+      {
+        "name": "apim-bundles-info-retrierver",
+        "type": "rest",
+        "method": "GET",
+        "path": "/telco-super-app/bundles-info-retrierver/v1/22870210044",
+        "headers": [],
+        "body": "",
+        "expectedStatus": "200",
+        "p95": null,
+        "checks": [],
+        "extract": [],
+        "stopOnFailure": false,
+        "soapVersion": "1.1",
+        "soapAction": ""
+      }
+    ]
+  },
+  {
+    "id": "mwm6xg3u7ykd",
+    "name": "Kube Version",
+    "folder": "Surepay Info Retriever",
+    "description": "",
+    "baseUrl": "https://apps.togocom.tg",
+    "authId": "",
+    "dangerous": false,
+    "thinkTime": 1,
+    "variables": [],
+    "thresholds": {
+      "p95": 1000,
+      "p99": 2000,
+      "errorRate": 0.01,
+      "checksRate": 0.99
+    },
+    "steps": [
+      {
+        "name": "kube-bundles-info-retrierver",
+        "type": "rest",
+        "method": "GET",
+        "path": "/surepay-info-retriever/v1/bundles/22870210044",
+        "headers": [],
+        "body": "",
+        "expectedStatus": "200",
+        "p95": null,
+        "checks": [],
+        "extract": [],
+        "stopOnFailure": false,
+        "soapVersion": "1.1",
+        "soapAction": ""
+      }
+    ]
+  }
+]

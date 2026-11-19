@@ -1,0 +1,202 @@
+_version: 2
+
+# ---------------------------------------------------------------------------
+# Errors
+# ---------------------------------------------------------------------------
+cli.error.workspace_open:
+  en: "Cannot open workspace %{path}: %{error}"
+  fr: "Impossible d'ouvrir le workspace %{path} : %{error}"
+
+cli.error.scenario_not_found:
+  en: "Scenario not found: %{scenario}"
+  fr: "Scénario introuvable : %{scenario}"
+
+cli.error.profile_unknown:
+  en: "Unknown profile: %{profile}"
+  fr: "Profil inconnu : %{profile}"
+
+cli.error.dangerous_confirm:
+  en: "Scenario \"%{name}\" is marked with real effects. Re-run with --yes to confirm."
+  fr: "Le scénario « %{name} » est marqué effets réels. Relancez avec --yes pour confirmer."
+
+cli.error.duration_invalid:
+  en: "Invalid duration: %{error}"
+  fr: "Durée invalide : %{error}"
+
+cli.error.ramp_up_invalid:
+  en: "Invalid ramp-up: %{error}"
+  fr: "Montée invalide : %{error}"
+
+cli.error.ramp_down_invalid:
+  en: "Invalid ramp-down: %{error}"
+  fr: "Descente invalide : %{error}"
+
+cli.error.execution_failed:
+  en: "Error: %{message}"
+  fr: "Erreur : %{message}"
+
+# ---------------------------------------------------------------------------
+# Summary
+# ---------------------------------------------------------------------------
+cli.summary.no_summary:
+  en: "No summary available."
+  fr: "Aucun résumé disponible."
+
+cli.summary.requests:
+  en: "Requests      : %{count} (%{rps} req/s)"
+  fr: "Requêtes      : %{count} (%{rps} req/s)"
+
+cli.summary.transactions:
+  en: "Transactions  : %{count} (%{rate} /s)"
+  fr: "Transactions  : %{count} (%{rate} /s)"
+
+cli.summary.avg:
+  en: "Average       : %{value}"
+  fr: "Temps moyen   : %{value}"
+
+cli.summary.median:
+  en: "Median        : %{value}"
+  fr: "Médiane       : %{value}"
+
+cli.summary.p90_p95:
+  en: "p90 / p95     : %{p90} / %{p95}"
+  fr: "p90 / p95     : %{p90} / %{p95}"
+
+cli.summary.p99_max:
+  en: "p99 / max     : %{p99} / %{max}"
+  fr: "p99 / max     : %{p99} / %{max}"
+
+cli.summary.errors_checks:
+  en: "HTTP Errors   : %{errors}   Checks : %{checks}"
+  fr: "Erreurs HTTP  : %{errors}   Checks : %{checks}"
+
+cli.summary.vus_max:
+  en: "Max VUs       : %{vus}"
+  fr: "VUs max       : %{vus}"
+
+cli.summary.dropped:
+  en: "Dropped       : %{count}"
+  fr: "Abandonnées   : %{count}"
+
+cli.summary.thresholds:
+  en: "Thresholds:"
+  fr: "Seuils :"
+
+cli.summary.reports:
+  en: "Reports : %{reports}"
+  fr: "Rapports : %{reports}"
+
+# ---------------------------------------------------------------------------
+# Table headers
+# ---------------------------------------------------------------------------
+cli.table.step:
+  en: "Step"
+  fr: "Étape"
+
+cli.table.requests:
+  en: "Requests"
+  fr: "Requêtes"
+
+cli.table.average:
+  en: "Average"
+  fr: "Moyenne"
+
+cli.table.p95:
+  en: "p95"
+  fr: "p95"
+
+cli.table.p99:
+  en: "p99"
+  fr: "p99"
+
+cli.table.errors:
+  en: "Errors"
+  fr: "Erreurs"
+
+# ---------------------------------------------------------------------------
+# List command
+# ---------------------------------------------------------------------------
+cli.list.auth_none:
+  en: "none"
+  fr: "aucune"
+
+cli.list.root:
+  en: "(root)"
+  fr: "(racine)"
+
+cli.list.steps_count:
+  en: "%{count} steps"
+  fr: "%{count} étapes"
+
+cli.list.auth_label:
+  en: "auth %{auth}"
+  fr: "auth %{auth}"
+
+cli.list.summary:
+  en: "\n%{count} scenario(s) in %{workspace}"
+  fr: "\n%{count} scénario(s) dans %{workspace}"
+
+# ---------------------------------------------------------------------------
+# Validate command
+# ---------------------------------------------------------------------------
+cli.validate.problem_detected:
+  en: "\n%{count} problem(s) detected."
+  fr: "\n%{count} problème(s) détecté(s)."
+
+cli.validate.scenarios_valid:
+  en: "\n%{count} scenario(s) valid."
+  fr: "\n%{count} scénario(s) valides."
+
+cli.validate.name_empty:
+  en: "empty name"
+  fr: "nom vide"
+
+cli.validate.no_steps:
+  en: "no steps"
+  fr: "aucune étape"
+
+cli.validate.base_url_missing:
+  en: "missing base URL"
+  fr: "URL de base manquante"
+
+cli.validate.base_url_invalid:
+  en: "invalid base URL: %{url}"
+  fr: "URL de base invalide : %{url}"
+
+cli.validate.auth_not_found:
+  en: "referenced authentication not found"
+  fr: "authentification référencée introuvable"
+
+cli.validate.threshold_error_rate:
+  en: "error rate threshold out of [0, 1]"
+  fr: "seuil d'erreurs hors de [0, 1]"
+
+cli.validate.threshold_checks_rate:
+  en: "checks rate threshold out of [0, 1]"
+  fr: "seuil de checks hors de [0, 1]"
+
+cli.validate.step_path_empty:
+  en: "%{step}: empty path"
+  fr: "%{step} : chemin vide"
+
+cli.validate.step_status_invalid:
+  en: "%{step}: invalid expected status"
+  fr: "%{step} : statut attendu invalide"
+
+cli.validate.step_soap_body_empty:
+  en: "%{step}: empty SOAP body"
+  fr: "%{step} : corps SOAP vide"
+
+# ---------------------------------------------------------------------------
+# Import command
+# ---------------------------------------------------------------------------
+cli.import.complete:
+  en: "Import complete: %{files} file(s), %{runs} run(s), %{backfilled} summary/summaries backfilled.\nWorkspace: %{workspace}"
+  fr: "Import terminé : %{files} fichier(s), %{runs} exécution(s), %{backfilled} résumé(s) reconstitué(s).\nWorkspace : %{workspace}"
+
+# ---------------------------------------------------------------------------
+# Run command
+# ---------------------------------------------------------------------------
+cli.run.stop_requested:
+  en: "\nStop requested…"
+  fr: "\nArrêt demandé…"

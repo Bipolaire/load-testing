@@ -1,0 +1,518 @@
+_version: 2
+
+# ---------------------------------------------------------------------------
+# Checks
+# ---------------------------------------------------------------------------
+check.op.equals:
+  en: "equals"
+  fr: "est égal à"
+check.op.not_equals:
+  en: "does not equal"
+  fr: "est différent de"
+check.op.contains:
+  en: "contains"
+  fr: "contient"
+check.op.exists:
+  en: "exists"
+  fr: "existe"
+check.op.not_empty:
+  en: "is not empty"
+  fr: "n'est pas vide"
+check.op.is_array:
+  en: "is an array"
+  fr: "est une liste"
+check.op.is_number:
+  en: "is a number"
+  fr: "est un nombre"
+check.op.less_than:
+  en: "is less than"
+  fr: "est inférieur à"
+check.op.greater_than:
+  en: "is greater than"
+  fr: "est supérieur à"
+
+# ---------------------------------------------------------------------------
+# Authentification
+# ---------------------------------------------------------------------------
+auth.type.none:
+  en: "None"
+  fr: "Aucune"
+auth.type.oauth2:
+  en: "OAuth2 (WSO2, Keycloak…)"
+  fr: "OAuth2 (WSO2, Keycloak…)"
+auth.type.bearer:
+  en: "Fixed Bearer token"
+  fr: "Jeton Bearer fixe"
+auth.type.apikey:
+  en: "API key"
+  fr: "Clé d'API"
+auth.default.name:
+  en: "New authentication"
+  fr: "Nouvelle authentification"
+
+# ---------------------------------------------------------------------------
+# Scénarios
+# ---------------------------------------------------------------------------
+scenario.default.name:
+  en: "New scenario"
+  fr: "Nouveau scénario"
+scenario.demo.name:
+  en: "k6 demo (QuickPizza)"
+  fr: "Démo k6 (QuickPizza)"
+scenario.demo.description:
+  en: "Public k6 demo API"
+  fr: "API publique de démonstration de k6"
+
+# ---------------------------------------------------------------------------
+# Profils de charge
+# ---------------------------------------------------------------------------
+profile.smoke.label:
+  en: "Smoke"
+  fr: "Smoke"
+profile.load.label:
+  en: "Load"
+  fr: "Load"
+profile.stress.label:
+  en: "Stress"
+  fr: "Stress"
+profile.spike.label:
+  en: "Spike"
+  fr: "Spike"
+profile.soak.label:
+  en: "Soak"
+  fr: "Soak"
+profile.tps.label:
+  en: "Constant TPS"
+  fr: "TPS constant"
+profile.breakpoint.label:
+  en: "Breakpoint"
+  fr: "Breakpoint"
+
+profile.smoke.desc:
+  en: "Check that the scenario works"
+  fr: "Vérifier que le scénario fonctionne"
+profile.load.desc:
+  en: "Normal baseline load"
+  fr: "Charge normale de référence"
+profile.stress.desc:
+  en: "Find the breaking point"
+  fr: "Trouver le point de rupture"
+profile.spike.desc:
+  en: "Sudden surge of traffic"
+  fr: "Afflux soudain"
+profile.soak.desc:
+  en: "Endurance / memory leaks"
+  fr: "Endurance / fuites mémoire"
+profile.tps.desc:
+  en: "Hold a precise throughput"
+  fr: "Tenir un débit précis"
+profile.breakpoint.desc:
+  en: "Max sustainable throughput (auto-stop)"
+  fr: "Débit max soutenable (arrêt auto)"
+
+profile.smoke.defaults:
+  en: "2 VUs · 1 min"
+  fr: "2 VUs · 1 min"
+profile.load.defaults:
+  en: "20 VUs · ~4 min 30"
+  fr: "20 VUs · ~4 min 30"
+profile.stress.defaults:
+  en: "50 → 100 VUs · 7 min"
+  fr: "50 → 100 VUs · 7 min"
+profile.spike.defaults:
+  en: "5 → 100 VUs in 10 s · 2 min"
+  fr: "5 → 100 VUs en 10 s · 2 min"
+profile.soak.defaults:
+  en: "20 VUs · 30 min"
+  fr: "20 VUs · 30 min"
+profile.tps.defaults:
+  en: "TPS/s · 5 min"
+  fr: "TPS/s · 5 min"
+profile.breakpoint.defaults:
+  en: "1 → TPS/s · 10 min"
+  fr: "1 → TPS/s · 10 min"
+
+profile.smoke.vus_label:
+  en: "VUs"
+  fr: "VUs"
+profile.load.vus_label:
+  en: "VUs at plateau (default 20)"
+  fr: "VUs au plateau (défaut 20)"
+profile.stress.vus_label:
+  en: "VUs at peak (default 100)"
+  fr: "VUs au pic (défaut 100)"
+profile.spike.vus_label:
+  en: "VUs at peak (default 100)"
+  fr: "VUs au pic (défaut 100)"
+profile.soak.vus_label:
+  en: "VUs (default 20)"
+  fr: "VUs (défaut 20)"
+profile.tps.vus_label:
+  en: "Max VUs (auto)"
+  fr: "VUs max (auto)"
+profile.breakpoint.vus_label:
+  en: "Max VUs (auto)"
+  fr: "VUs max (auto)"
+
+profile.smoke.duration_label:
+  en: "Duration (default 1m)"
+  fr: "Durée (défaut 1m)"
+profile.load.duration_label:
+  en: "Plateau duration (default 3m)"
+  fr: "Durée du plateau (défaut 3m)"
+profile.stress.duration_label:
+  en: "Total duration (default 7m)"
+  fr: "Durée totale (défaut 7m)"
+profile.spike.duration_label:
+  en: "Total duration (default 2m)"
+  fr: "Durée totale (défaut 2m)"
+profile.soak.duration_label:
+  en: "Duration (default 30m)"
+  fr: "Durée (défaut 30m)"
+profile.tps.duration_label:
+  en: "Duration (default 5m)"
+  fr: "Durée (défaut 5m)"
+profile.breakpoint.duration_label:
+  en: "Ramp duration (default 10m)"
+  fr: "Durée de la montée (défaut 10m)"
+
+profile.tooltip.vus_load:
+  en: "Number of virtual users during the load plateau."
+  fr: "Nombre d'utilisateurs virtuels pendant le plateau de charge."
+profile.tooltip.vus_peak:
+  en: "Maximum number of VUs reached at the scenario peak."
+  fr: "Nombre maximal de VUs atteint au pic du scénario."
+profile.tooltip.vus_cap:
+  en: "VU ceiling to sustain the target rate (computed automatically if empty)."
+  fr: "Plafond de VUs pour tenir le débit cible (calculé automatiquement si vide)."
+profile.tooltip.vus_smoke:
+  en: "A few VUs to validate the scenario quickly."
+  fr: "Peu de VUs pour valider le scénario rapidement."
+profile.tooltip.vus_soak:
+  en: "Constant VUs for the whole endurance duration."
+  fr: "VUs constants pendant toute la durée d'endurance."
+profile.tooltip.duration_plateau:
+  en: "Duration of the constant-load plateau (excluding ramp-up and ramp-down)."
+  fr: "Durée du plateau à charge constante (hors montée et descente)."
+profile.tooltip.duration_scaled:
+  en: "Total scenario duration; stages are scaled accordingly."
+  fr: "Durée totale du scénario ; les paliers sont mis à l'échelle."
+profile.tooltip.duration_breakpoint:
+  en: "Duration of the rate ramp up to the target TPS."
+  fr: "Durée de la rampe de débit jusqu'au TPS cible."
+profile.tooltip.duration_tps:
+  en: "Duration during which the target rate is held."
+  fr: "Durée pendant laquelle le débit cible est maintenu."
+profile.tooltip.duration_constant:
+  en: "Total duration at constant load."
+  fr: "Durée totale à charge constante."
+profile.tooltip.tps:
+  en: "Number of iterations (transactions) started per second."
+  fr: "Nombre d'itérations (transactions) démarrées par seconde."
+profile.tooltip.ramp_up:
+  en: "Duration of the gradual ramp-up to the plateau VUs (e.g. 60s)."
+  fr: "Durée de la montée progressive jusqu'aux VUs du plateau (ex. 60s)."
+profile.tooltip.ramp_down:
+  en: "Duration of the gradual ramp-down to 0 VUs at the end of the test (e.g. 30s)."
+  fr: "Durée de la descente progressive vers 0 VU en fin de test (ex. 30s)."
+profile.tooltip.iterations:
+  en: "Stop early as soon as this number of iterations is reached (optional)."
+  fr: "Arrêt anticipé dès que ce nombre d'itérations est atteint (optionnel)."
+
+# ---------------------------------------------------------------------------
+# Statuts d'exécution
+# ---------------------------------------------------------------------------
+run.status.running:
+  en: "running"
+  fr: "en cours"
+run.status.passed:
+  en: "passed"
+  fr: "réussi"
+run.status.failed:
+  en: "thresholds not met"
+  fr: "seuils non respectés"
+run.status.error:
+  en: "error"
+  fr: "erreur"
+run.status.stopped:
+  en: "stopped"
+  fr: "arrêté"
+run.status.interrupted:
+  en: "interrupted"
+  fr: "interrompu"
+
+# ---------------------------------------------------------------------------
+# Rapports (HTML / PDF)
+# ---------------------------------------------------------------------------
+report.app_name:
+  en: "Load Testing"
+  fr: "Load Testing"
+
+report.chart.no_data:
+  en: "No data"
+  fr: "Pas de données"
+report.chart.vus:
+  en: "Active VUs"
+  fr: "VUs actifs"
+report.chart.rps:
+  en: "Throughput"
+  fr: "Débit"
+report.chart.p95:
+  en: "p95 latency"
+  fr: "Latence p95"
+report.chart.http_errors:
+  en: "HTTP errors"
+  fr: "Erreurs HTTP"
+
+report.threshold.ok:
+  en: "met"
+  fr: "respecté"
+report.threshold.ko:
+  en: "not met"
+  fr: "non respecté"
+
+report.section.evolution:
+  en: "Evolution"
+  fr: "Évolution"
+report.section.thresholds:
+  en: "Thresholds (objectives)"
+  fr: "Seuils (objectifs)"
+report.section.by_step:
+  en: "By step"
+  fr: "Par étape"
+report.section.checks:
+  en: "Checks"
+  fr: "Checks"
+report.section.details:
+  en: "Details"
+  fr: "Détails"
+report.section.kpis:
+  en: "Key indicators"
+  fr: "Indicateurs clés"
+
+report.meta.started:
+  en: "Started"
+  fr: "Démarré"
+report.meta.duration:
+  en: "Duration"
+  fr: "Durée"
+report.meta.status:
+  en: "Status"
+  fr: "Statut"
+
+report.details.run:
+  en: "run"
+  fr: "run"
+report.details.profile:
+  en: "profile"
+  fr: "profil"
+
+report.kpi.requests:
+  en: "Requests"
+  fr: "Requêtes"
+report.kpi.rps:
+  en: "Throughput"
+  fr: "Débit"
+report.kpi.transactions:
+  en: "Transactions"
+  fr: "Transactions"
+report.kpi.vus_max:
+  en: "Max VUs"
+  fr: "VUs max"
+report.kpi.avg:
+  en: "Average time"
+  fr: "Temps moyen"
+report.kpi.med:
+  en: "Median"
+  fr: "Médiane"
+report.kpi.p95:
+  en: "p95"
+  fr: "p95"
+report.kpi.p99:
+  en: "p99"
+  fr: "p99"
+report.kpi.max:
+  en: "Max"
+  fr: "Max"
+report.kpi.http_errors:
+  en: "HTTP errors"
+  fr: "Erreurs HTTP"
+report.kpi.checks_ok:
+  en: "Checks passed"
+  fr: "Checks réussis"
+report.kpi.dropped:
+  en: "Dropped transactions"
+  fr: "Transactions abandonnées"
+
+report.empty.thresholds:
+  en: "No thresholds."
+  fr: "Aucun seuil."
+report.empty.steps:
+  en: "No per-step statistics."
+  fr: "Aucune statistique par étape."
+report.empty.checks:
+  en: "No checks."
+  fr: "Aucun check."
+
+report.table.metric:
+  en: "Metric"
+  fr: "Métrique"
+report.table.target:
+  en: "Target"
+  fr: "Objectif"
+report.table.result:
+  en: "Result"
+  fr: "Résultat"
+report.table.step:
+  en: "Step"
+  fr: "Étape"
+report.table.requests:
+  en: "Requests"
+  fr: "Requêtes"
+report.table.rps:
+  en: "req/s"
+  fr: "req/s"
+report.table.avg:
+  en: "Average"
+  fr: "Moyenne"
+report.table.p95:
+  en: "p95"
+  fr: "p95"
+report.table.p99:
+  en: "p99"
+  fr: "p99"
+report.table.max:
+  en: "Max"
+  fr: "Max"
+report.table.errors:
+  en: "Errors"
+  fr: "Erreurs"
+report.table.check:
+  en: "Check"
+  fr: "Check"
+report.table.passes:
+  en: "Passed"
+  fr: "Réussis"
+report.table.fails:
+  en: "Failed"
+  fr: "Échoués"
+report.table.rate:
+  en: "Rate"
+  fr: "Taux"
+
+report.pdf.executive_title:
+  en: "Summary · %{test} · %{profile}"
+  fr: "Synthèse · %{test} · %{profile}"
+report.pdf.full_title:
+  en: "Report · %{test} · %{profile}"
+  fr: "Rapport · %{test} · %{profile}"
+report.pdf.verdict_passed:
+  en: "PASSED"
+  fr: "RÉUSSI"
+report.pdf.verdict_failed:
+  en: "FAILED"
+  fr: "ÉCHEC"
+report.pdf.page:
+  en: "Page %{n} / %{total}"
+  fr: "Page %{n} / %{total}"
+report.pdf.summary_passed:
+  en: "All %{total} thresholds were met."
+  fr: "Les %{total} seuils ont été respectés."
+report.pdf.summary_failed:
+  en: "%{ko} of %{total} thresholds were not met."
+  fr: "%{ko} seuil(s) sur %{total} non respecté(s)."
+report.pdf.summary_no_thresholds:
+  en: "No thresholds defined for this run."
+  fr: "Aucun seuil défini pour ce run."
+report.pdf.summary_status:
+  en: "Run status: %{status}."
+  fr: "Statut du run : %{status}."
+
+# ---------------------------------------------------------------------------
+# Import curl
+# ---------------------------------------------------------------------------
+curl.error.empty:
+  en: "Empty command"
+  fr: "Commande vide"
+curl.error.not_curl:
+  en: "The command must start with “curl”"
+  fr: "La commande doit commencer par « curl »"
+curl.error.no_url:
+  en: "URL not found in the command"
+  fr: "URL introuvable dans la commande"
+curl.error.invalid_url:
+  en: "Invalid URL: %{error}"
+  fr: "URL invalide : %{error}"
+curl.note.insecure_ignored:
+  en: "Option -k ignored: TLS verification stays enabled."
+  fr: "Option -k ignorée : la vérification TLS reste active."
+curl.note.header_removed:
+  en: "Header “%{name}” removed: use an authentication profile (Authentications tab)."
+  fr: "En-tête « %{name} » retiré : utilisez un profil d'authentification (onglet Authentifications)."
+curl.note.cookie_removed:
+  en: "Header “Cookie” removed (Postman / browser session)."
+  fr: "En-tête « Cookie » retiré (session Postman / navigateur)."
+
+# ---------------------------------------------------------------------------
+# XML / SOAP
+# ---------------------------------------------------------------------------
+xml.error.unmatched_close:
+  en: "closing tag without an opening tag"
+  fr: "balise fermante sans ouvrante"
+xml.error.incomplete:
+  en: "Incomplete XML: unclosed tag"
+  fr: "XML incomplet : balise non fermée"
+xml.error.empty:
+  en: "Empty XML"
+  fr: "XML vide"
+
+# ---------------------------------------------------------------------------
+# Stockage / import workspace
+# ---------------------------------------------------------------------------
+storage.import.not_found:
+  en: "Folder not found: select a folder containing data/tests.json"
+  fr: "Dossier introuvable : sélectionnez un dossier contenant data/tests.json"
+storage.import.already_exists:
+  en: "The destination workspace already contains data"
+  fr: "Le workspace de destination contient déjà des données"
+
+# ---------------------------------------------------------------------------
+# Dossiers
+# ---------------------------------------------------------------------------
+folder.error.empty_name:
+  en: "Empty folder name"
+  fr: "Nom de dossier vide"
+folder.error.move_into_self:
+  en: "Cannot move a folder into itself"
+  fr: "Impossible de déplacer un dossier dans lui-même"
+
+# ---------------------------------------------------------------------------
+# Durées
+# ---------------------------------------------------------------------------
+duration.error.empty:
+  en: "Empty duration"
+  fr: "Durée vide"
+duration.error.invalid:
+  en: "Invalid duration “%{input}” (e.g. 30s, 5m, 1h30m)"
+  fr: "Durée invalide « %{input} » (ex : 30s, 5m, 1h30m)"
+duration.error.invalid_short:
+  en: "Invalid duration “%{input}”"
+  fr: "Durée invalide « %{input} »"
+duration.error.missing_unit:
+  en: "Invalid duration “%{input}”: missing unit"
+  fr: "Durée invalide « %{input} » : unité manquante"
+duration.error.unknown_unit:
+  en: "Unknown unit “%{unit}” (ms, s, m, h)"
+  fr: "Unité inconnue « %{unit} » (ms, s, m, h)"
+duration.format.hours:
+  en: "%{hours} h %{minutes} min"
+  fr: "%{hours} h %{minutes} min"
+duration.format.minutes:
+  en: "%{minutes} min %{seconds} s"
+  fr: "%{minutes} min %{seconds} s"
+duration.format.seconds:
+  en: "%{seconds} s"
+  fr: "%{seconds} s"
+duration.format.millis:
+  en: "%{ms} ms"
+  fr: "%{ms} ms"

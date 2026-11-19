@@ -1,0 +1,94 @@
+_version: 2
+engine.plan.constant_vus:
+  en: "%{vus} VUs for %{duration}"
+  fr: "%{vus} VUs pendant %{duration}"
+engine.plan.ramping_vus:
+  en: "staged ramp: %{steps}"
+  fr: "montée par paliers : %{steps}"
+engine.plan.constant_arrival:
+  en: "%{rate} iterations/s for %{duration}"
+  fr: "%{rate} itérations/s pendant %{duration}"
+engine.plan.ramping_arrival:
+  en: "throughput ramp: %{steps}"
+  fr: "montée de débit : %{steps}"
+engine.log.scenario:
+  en: "> Scenario: %{name}"
+  fr: "> Scénario : %{name}"
+engine.log.target:
+  en: "> Target: %{url}"
+  fr: "> Cible : %{url}"
+engine.log.profile:
+  en: "> Profile: %{label}"
+  fr: "> Profil : %{label}"
+engine.log.executor:
+  en: "> Executor: %{plan}"
+  fr: "> Exécuteur : %{plan}"
+engine.log.thresholds:
+  en: "> Thresholds: %{rules}"
+  fr: "> Seuils : %{rules}"
+engine.log.insecure_tls:
+  en: "> TLS verification disabled for this scenario."
+  fr: "> Vérification TLS désactivée pour ce scénario."
+engine.log.config_write_failed:
+  en: "> Could not write configuration: %{error}"
+  fr: "> Impossible d'écrire la configuration : %{error}"
+engine.log.auth_error:
+  en: "> Authentication error: %{error}"
+  fr: "> Erreur d'authentification : %{error}"
+engine.log.auth:
+  en: "> Authentication: %{desc}"
+  fr: "> Authentification : %{desc}"
+engine.log.auto_stop:
+  en: "> Automatic stop: %{reason}"
+  fr: "> Arrêt automatique : %{reason}"
+engine.log.reports_failed:
+  en: "> Could not write reports: %{error}"
+  fr: "> Impossible d'écrire les rapports : %{error}"
+engine.log.reports_skipped_stopped:
+  en: "> Reports not written (run stopped by user)."
+  fr: "> Rapports non générés (arrêt manuel)."
+engine.log.finished:
+  en: "> Finished · %{status} · %{requests} requests · p95 %{p95} ms · errors %{errors} %"
+  fr: "> Terminé · %{status} · %{requests} requêtes · p95 %{p95} ms · errors %{errors} %"
+engine.log.threshold_failed:
+  en: "> Threshold not met: %{metric} %{expr}"
+  fr: "> Seuil non respecté : %{metric} %{expr}"
+engine.http.invalid_method:
+  en: "Invalid HTTP method: %{method}"
+  fr: "Méthode HTTP invalide : %{method}"
+engine.http.no_soap_fault:
+  en: "%{tag}: no SOAP Fault"
+  fr: "%{tag} : pas de SOAP Fault"
+engine.http.no_soap_fault_label:
+  en: no SOAP Fault
+  fr: pas de SOAP Fault
+engine.try.step_missing:
+  en: "Step not found"
+  fr: "Étape introuvable"
+engine.auth.missing_basic:
+  en: "OAuth2: client key (Basic) missing"
+  fr: "OAuth2 : clé client (Basic) manquante"
+engine.auth.token_failed:
+  en: "OAuth2: failed to obtain token (HTTP %{status}): %{body}"
+  fr: "OAuth2 : échec d'obtention du jeton (HTTP %{status}) : %{body}"
+engine.auth.invalid_json:
+  en: "OAuth2: invalid JSON response (%{error})"
+  fr: "OAuth2 : réponse JSON invalide (%{error})"
+engine.auth.no_access_token:
+  en: "OAuth2: no access_token in response: %{body}"
+  fr: "OAuth2 : pas d'access_token dans la réponse : %{body}"
+engine.auth.token_refreshed:
+  en: "> OAuth2: token refreshed"
+  fr: "> OAuth2 : jeton renouvelé"
+engine.auth.refresh_failed:
+  en: "> OAuth2: refresh failed: %{error}"
+  fr: "> OAuth2 : renouvellement impossible : %{error}"
+engine.auth.desc.bearer:
+  en: Bearer token
+  fr: jeton Bearer
+engine.auth.desc.apikey:
+  en: "API key (%{header})"
+  fr: "clé d'API (%{header})"
+engine.auth.desc.none:
+  en: none
+  fr: aucune

@@ -1,0 +1,857 @@
+_version: 2
+
+# Interface de lt-app. Les libellés de modèles (AuthType, RunStatus, Profile…)
+# sont déjà traduits dans lt-core (crates/lt-core/locales/core.yml).
+
+# ---------------------------------------------------------------------------
+# Application / onglets / barre d'outils
+# ---------------------------------------------------------------------------
+app.title:
+  en: "Load Testing"
+  fr: "Load Testing"
+
+tab.run:
+  en: "Run"
+  fr: "Lancer"
+tab.scenarios:
+  en: "Scenarios"
+  fr: "Scénarios"
+tab.auth:
+  en: "Auth"
+  fr: "Auth"
+tab.history:
+  en: "History"
+  fr: "Historique"
+
+toolbar.refresh:
+  en: "Refresh"
+  fr: "Rafraîchir"
+toolbar.open_workspace:
+  en: "Open folder…"
+  fr: "Ouvrir un dossier…"
+toolbar.import:
+  en: "Import…"
+  fr: "Importer…"
+toolbar.theme:
+  en: "Theme"
+  fr: "Thème"
+toolbar.language:
+  en: "Language"
+  fr: "Langue"
+
+theme.light:
+  en: "Light"
+  fr: "Clair"
+theme.dark:
+  en: "Dark"
+  fr: "Sombre"
+theme.system:
+  en: "System"
+  fr: "Système"
+
+# ---------------------------------------------------------------------------
+# Statuts (barre de lancement et pied de fenêtre)
+# ---------------------------------------------------------------------------
+status.ready:
+  en: "Ready"
+  fr: "Prêt"
+status.starting:
+  en: "Starting…"
+  fr: "Démarrage…"
+status.running:
+  en: "Running · %{duration}"
+  fr: "En cours · %{duration}"
+status.failed:
+  en: "Failed: %{error}"
+  fr: "Échec : %{error}"
+status.last_test:
+  en: "Last test: %{status}"
+  fr: "Dernier test : %{status}"
+
+statusbar.counts:
+  en: "%{scenarios} scenarios · %{runs} runs"
+  fr: "%{scenarios} scénarios · %{runs} runs"
+
+# ---------------------------------------------------------------------------
+# Actions (boutons, infobulles)
+# ---------------------------------------------------------------------------
+action.save:
+  en: "Save"
+  fr: "Enregistrer"
+action.delete:
+  en: "Delete"
+  fr: "Supprimer"
+action.duplicate:
+  en: "Duplicate"
+  fr: "Dupliquer"
+action.new:
+  en: "New"
+  fr: "Nouveau"
+action.new_feminine:
+  en: "New"
+  fr: "Nouvelle"
+action.create_folder:
+  en: "Create a folder"
+  fr: "Créer un dossier"
+action.create_scenario:
+  en: "Create a scenario"
+  fr: "Créer un scénario"
+action.add_auth:
+  en: "Add an authentication"
+  fr: "Ajouter une authentification"
+action.start:
+  en: "Run"
+  fr: "Lancer"
+action.start_dangerous:
+  en: "Run (real effects)"
+  fr: "Lancer (effets réels)"
+action.stop:
+  en: "Stop"
+  fr: "Arrêter"
+action.add_step:
+  en: "Step"
+  fr: "Étape"
+action.remove_step:
+  en: "Remove step"
+  fr: "Supprimer l'étape"
+action.test:
+  en: "Test"
+  fr: "Tester"
+action.testing:
+  en: "Testing…"
+  fr: "Test en cours…"
+action.test_request:
+  en: "Test the request"
+  fr: "Tester la requête"
+action.import_as_step:
+  en: "Import as step"
+  fr: "Importer comme étape"
+action.open_html:
+  en: "Open HTML report"
+  fr: "Ouvrir le rapport HTML"
+action.open_pdf:
+  en: "Open PDF"
+  fr: "Ouvrir le PDF"
+action.open_executive:
+  en: "Executive summary"
+  fr: "Synthèse exécutive"
+action.open_reports_folder:
+  en: "Reports folder"
+  fr: "Dossier des rapports"
+
+# ---------------------------------------------------------------------------
+# Dialogues de confirmation
+# ---------------------------------------------------------------------------
+dialog.cancel:
+  en: "Cancel"
+  fr: "Annuler"
+dialog.delete.title:
+  en: "Delete “%{subject}”?"
+  fr: "Supprimer « %{subject} » ?"
+dialog.delete.ok:
+  en: "Delete"
+  fr: "Supprimer"
+dialog.discard.title:
+  en: "Unsaved changes"
+  fr: "Modifications non enregistrées"
+dialog.discard.message:
+  en: "Unsaved changes will be lost. Continue?"
+  fr: "Les changements non enregistrés seront perdus. Continuer ?"
+dialog.discard.ok:
+  en: "Discard"
+  fr: "Abandonner"
+dialog.dangerous.title:
+  en: "Scenario with real effects"
+  fr: "Scénario à effets réels"
+dialog.dangerous.summary:
+  en: "%{name}\n%{url}\nProfile: %{profile} · VUs: %{vus} · TPS: %{tps} · Duration: %{duration}"
+  fr: "%{name}\n%{url}\nProfil : %{profile} · VUs : %{vus} · TPS : %{tps} · Durée : %{duration}"
+dialog.dangerous.ok:
+  en: "Run anyway"
+  fr: "Lancer quand même"
+dialog.import.title:
+  en: "Replace the workspace?"
+  fr: "Remplacer le workspace ?"
+dialog.import.message:
+  en: "The current workspace already contains data. Replace it with the contents of “%{source}”?"
+  fr: "Le workspace actuel contient déjà des données. Remplacer avec le contenu de « %{source} » ?"
+dialog.import.ok:
+  en: "Replace"
+  fr: "Remplacer"
+
+confirm.irreversible:
+  en: "This action is permanent."
+  fr: "Cette action est définitive."
+confirm.auth_in_use:
+  en: "Used by %{count} scenario(s) — the link will be removed. This action is permanent."
+  fr: "Utilisée par %{count} scénario(s) — le lien sera retiré. Action définitive."
+confirm.run_reports:
+  en: "Associated reports will also be deleted."
+  fr: "Les rapports associés seront aussi supprimés."
+confirm.step_removed:
+  en: "The step will be removed from the scenario (remember to save)."
+  fr: "L'étape sera retirée du scénario (pensez à enregistrer)."
+
+# ---------------------------------------------------------------------------
+# Pastilles et libellés communs
+# ---------------------------------------------------------------------------
+chip.dangerous:
+  en: "Real effects"
+  fr: "Effets réels"
+chip.modified:
+  en: "modified"
+  fr: "modifié"
+
+common.none:
+  en: "None"
+  fr: "Aucune"
+common.unknown:
+  en: "Unknown"
+  fr: "Inconnue"
+common.no_folder:
+  en: "No folder"
+  fr: "Sans dossier"
+common.all:
+  en: "All"
+  fr: "Tous"
+common.all_statuses:
+  en: "All statuses"
+  fr: "Tous les statuts"
+common.empty:
+  en: "(empty)"
+  fr: "(vide)"
+common.name:
+  en: "Name"
+  fr: "Nom"
+common.type:
+  en: "Type"
+  fr: "Type"
+common.ok:
+  en: "OK"
+  fr: "OK"
+common.failure:
+  en: "Failed"
+  fr: "Échec"
+
+# ---------------------------------------------------------------------------
+# Indicateurs partagés (onglet Lancer et Historique)
+# ---------------------------------------------------------------------------
+metric.requests:
+  en: "Requests"
+  fr: "Requêtes"
+metric.throughput:
+  en: "Throughput"
+  fr: "Débit"
+metric.average:
+  en: "Average"
+  fr: "Moyenne"
+metric.median:
+  en: "Median"
+  fr: "Médiane"
+metric.max:
+  en: "Max"
+  fr: "Max"
+metric.errors:
+  en: "Errors"
+  fr: "Erreurs"
+metric.checks:
+  en: "Checks"
+  fr: "Checks"
+metric.transactions:
+  en: "Transactions"
+  fr: "Transactions"
+metric.vus:
+  en: "VUs"
+  fr: "VUs"
+metric.vus_max:
+  en: "Max VUs"
+  fr: "VUs max"
+metric.dropped:
+  en: "Dropped"
+  fr: "Abandonnées"
+
+# ---------------------------------------------------------------------------
+# Notifications (toasts)
+# ---------------------------------------------------------------------------
+toast.save_failed:
+  en: "Could not save: %{error}"
+  fr: "Enregistrement impossible : %{error}"
+toast.delete_failed:
+  en: "Could not delete: %{error}"
+  fr: "Suppression impossible : %{error}"
+toast.refreshed:
+  en: "Data reloaded."
+  fr: "Données rechargées."
+toast.stop_requested:
+  en: "Stop requested…"
+  fr: "Arrêt demandé…"
+toast.open_failed:
+  en: "Could not open: %{error}"
+  fr: "Ouverture impossible : %{error}"
+toast.workspace:
+  en: "Workspace: %{path}"
+  fr: "Workspace : %{path}"
+toast.scenario.created:
+  en: "New scenario created."
+  fr: "Nouveau scénario créé."
+toast.scenario.duplicated:
+  en: "Scenario duplicated."
+  fr: "Scénario dupliqué."
+toast.scenario.deleted:
+  en: "Scenario deleted."
+  fr: "Scénario supprimé."
+toast.scenario.saved:
+  en: "Scenario saved."
+  fr: "Scénario enregistré."
+toast.auth.created:
+  en: "Authentication created."
+  fr: "Authentification créée."
+toast.auth.saved:
+  en: "Authentication saved."
+  fr: "Authentification enregistrée."
+toast.auth.deleted:
+  en: "Authentication deleted."
+  fr: "Authentification supprimée."
+toast.run.deleted:
+  en: "Run removed from history."
+  fr: "Exécution supprimée de l'historique."
+toast.run.finished:
+  en: "Test finished: %{status}."
+  fr: "Test terminé : %{status}."
+toast.run.engine_error:
+  en: "Engine error: %{error}"
+  fr: "Erreur du moteur : %{error}"
+toast.folder.added:
+  en: "Folder “%{name}” added."
+  fr: "Dossier « %{name} » ajouté."
+toast.folder.save_failed:
+  en: "Folder not saved: %{error}"
+  fr: "Dossier non enregistré : %{error}"
+toast.curl.imported:
+  en: "curl imported as step %{step}."
+  fr: "curl importé comme étape %{step}."
+toast.curl.imported_notes:
+  en: "curl imported as step %{step}. %{notes} note(s)."
+  fr: "curl importé comme étape %{step}. %{notes} note(s)."
+toast.import.done:
+  en: "Import: %{files} file(s), %{runs} run(s), %{backfilled} summary(ies) rebuilt."
+  fr: "Import : %{files} fichier(s), %{runs} exécution(s), %{backfilled} résumé(s) reconstitué(s)."
+toast.import.failed:
+  en: "Import failed: %{error}"
+  fr: "Import impossible : %{error}"
+
+# ---------------------------------------------------------------------------
+# Validation et erreurs
+# ---------------------------------------------------------------------------
+validation.scenario_name_required:
+  en: "The scenario name is required."
+  fr: "Le nom du scénario est obligatoire."
+validation.auth_name_required:
+  en: "The authentication name is required."
+  fr: "Le nom de l'authentification est obligatoire."
+validation.folder_name_required:
+  en: "Enter a folder name."
+  fr: "Indiquez un nom de dossier."
+validation.curl_required:
+  en: "Paste a curl command to import."
+  fr: "Collez une commande curl à importer."
+validation.select_scenario:
+  en: "Select a scenario to run."
+  fr: "Sélectionnez un scénario à lancer."
+validation.no_steps:
+  en: "This scenario has no steps."
+  fr: "Ce scénario n'a aucune étape."
+
+error.curl_invalid:
+  en: "Invalid curl: %{error}"
+  fr: "curl invalide : %{error}"
+error.runtime_unavailable:
+  en: "Async runtime unavailable: %{error}"
+  fr: "Moteur asynchrone indisponible : %{error}"
+error.runtime_start:
+  en: "Unable to start the async engine."
+  fr: "Impossible de démarrer le moteur asynchrone."
+error.try_failed:
+  en: "The test could not be run."
+  fr: "Le test n'a pas pu être exécuté."
+error.default_workspace:
+  en: "default workspace"
+  fr: "workspace par défaut"
+error.open_window:
+  en: "opening the main window"
+  fr: "ouverture de la fenêtre principale"
+
+# ---------------------------------------------------------------------------
+# Champs de saisie (placeholders)
+# ---------------------------------------------------------------------------
+placeholder.vus:
+  en: "VUs"
+  fr: "VUs"
+placeholder.tps:
+  en: "iteration/s"
+  fr: "itération/s"
+placeholder.duration:
+  en: "e.g. 5m"
+  fr: "ex : 5m"
+placeholder.ramp_up:
+  en: "e.g. 60s"
+  fr: "ex : 60s"
+placeholder.ramp_down:
+  en: "e.g. 30s"
+  fr: "ex : 30s"
+placeholder.iterations:
+  en: "e.g. 1000"
+  fr: "ex : 1000"
+placeholder.new_folder:
+  en: "New folder"
+  fr: "Nouveau dossier"
+placeholder.search:
+  en: "Search…"
+  fr: "Rechercher…"
+placeholder.step_name:
+  en: "Step name"
+  fr: "Nom de l'étape"
+placeholder.step_path:
+  en: "/path"
+  fr: "/chemin"
+placeholder.headers:
+  en: "Key: value"
+  fr: "Clé: valeur"
+placeholder.body:
+  en: "Request body"
+  fr: "Corps de la requête"
+placeholder.checks:
+  en: "path | equals | value"
+  fr: "chemin | equals | valeur"
+placeholder.extract:
+  en: "name | path"
+  fr: "nom | chemin"
+placeholder.step_p95:
+  en: "e.g. 800"
+  fr: "ex : 800"
+placeholder.soap_action:
+  en: "http://service/Method"
+  fr: "http://service/Methode"
+placeholder.scenario_name:
+  en: "Scenario name"
+  fr: "Nom du scénario"
+placeholder.folder:
+  en: "Folder (e.g. Acme / Staging)"
+  fr: "Dossier (ex : Togocom / Préprod)"
+placeholder.base_url:
+  en: "https://api.example.com"
+  fr: "https://api.exemple.com"
+placeholder.description:
+  en: "Description"
+  fr: "Description"
+placeholder.think_time:
+  en: "Pause between 2 transactions (s)"
+  fr: "Pause entre 2 transactions (s)"
+placeholder.variables:
+  en: "name | value1, value2"
+  fr: "nom | valeur1, valeur2"
+placeholder.curl:
+  en: "Paste a curl command here…"
+  fr: "Coller une commande curl ici…"
+placeholder.threshold_p95:
+  en: "e.g. 1000 (ms)"
+  fr: "ex : 1000 (ms)"
+placeholder.threshold_p99:
+  en: "e.g. 2000 (ms)"
+  fr: "ex : 2000 (ms)"
+placeholder.threshold_errors:
+  en: "e.g. 1 (%)"
+  fr: "ex : 1 (%)"
+placeholder.threshold_checks:
+  en: "e.g. 99 (%)"
+  fr: "ex : 99 (%)"
+placeholder.auth_name:
+  en: "Name"
+  fr: "Nom"
+placeholder.token_url:
+  en: "https://keycloak/…/token"
+  fr: "https://keycloak/…/token"
+placeholder.client_basic:
+  en: "Encoded Basic (if no client ID)"
+  fr: "Basic encodé (si pas d'identifiant)"
+placeholder.username:
+  en: "user (password grant)"
+  fr: "utilisateur (grant password)"
+placeholder.password:
+  en: "password"
+  fr: "mot de passe"
+placeholder.bearer_token:
+  en: "Bearer token"
+  fr: "jeton Bearer"
+placeholder.api_key:
+  en: "API key"
+  fr: "clé d'API"
+
+# ---------------------------------------------------------------------------
+# Dossiers (arborescence)
+# ---------------------------------------------------------------------------
+folder.field:
+  en: "Folder"
+  fr: "Dossier"
+
+# ---------------------------------------------------------------------------
+# Authentifications
+# ---------------------------------------------------------------------------
+auth.header:
+  en: "Authentications"
+  fr: "Authentifications"
+auth.empty_list:
+  en: "No authentication configured."
+  fr: "Aucune authentification configurée."
+auth.empty.title:
+  en: "No authentication"
+  fr: "Aucune authentification"
+auth.empty.subtitle:
+  en: "Configure OAuth2, Bearer or an API key for your scenarios."
+  fr: "Configurez OAuth2, Bearer ou une clé d'API pour vos scénarios."
+auth.default_title:
+  en: "Authentication"
+  fr: "Authentification"
+auth.none_hint:
+  en: "No authentication header will be added to requests."
+  fr: "Aucun en-tête d'authentification ne sera ajouté aux requêtes."
+auth.grant.client_credentials:
+  en: "Client credentials"
+  fr: "Client credentials"
+auth.grant.password:
+  en: "Password (ROPC)"
+  fr: "Mot de passe (ROPC)"
+auth.field.token_url:
+  en: "Token URL"
+  fr: "URL du jeton"
+auth.field.grant_type:
+  en: "Grant type"
+  fr: "Type de grant"
+auth.field.client_basic:
+  en: "Encoded Basic (optional, takes precedence over client_id/secret)"
+  fr: "Basic encodé (optionnel, prioritaire sur client_id/secret)"
+auth.field.username:
+  en: "User"
+  fr: "Utilisateur"
+auth.field.password:
+  en: "Password"
+  fr: "Mot de passe"
+auth.field.bearer_token:
+  en: "Bearer token"
+  fr: "Jeton Bearer"
+auth.field.header:
+  en: "Header"
+  fr: "En-tête"
+auth.field.api_key:
+  en: "API key"
+  fr: "Clé d'API"
+auth.configuration:
+  en: "Configuration"
+  fr: "Configuration"
+auth.secrets_hint:
+  en: "Secrets are masked on display; leave the ellipsis to keep them."
+  fr: "Les secrets sont masqués à l'affichage ; laissez les points de suspension pour les conserver."
+
+# ---------------------------------------------------------------------------
+# Historique
+# ---------------------------------------------------------------------------
+history.header:
+  en: "Runs"
+  fr: "Exécutions"
+history.empty_list:
+  en: "No run recorded."
+  fr: "Aucune exécution enregistrée."
+history.empty_list_hint:
+  en: "Launch a first test from the Run tab."
+  fr: "Lancez un premier test depuis l'onglet Lancer."
+history.no_match:
+  en: "No result for this filter."
+  fr: "Aucun résultat pour ce filtre."
+history.empty.title:
+  en: "Choose a run"
+  fr: "Choisissez une exécution"
+history.empty.subtitle:
+  en: "KPIs, thresholds and HTML reports will appear here."
+  fr: "Les KPIs, seuils et rapports HTML apparaîtront ici."
+history.meta.profile:
+  en: "Profile"
+  fr: "Profil"
+history.meta.started:
+  en: "Started"
+  fr: "Démarré"
+history.meta.duration:
+  en: "Duration"
+  fr: "Durée"
+history.meta.exit_code:
+  en: "Exit code"
+  fr: "Code de sortie"
+history.meta.vus:
+  en: "VUs"
+  fr: "VUs"
+history.meta.tps:
+  en: "TPS"
+  fr: "TPS"
+history.meta.requested_duration:
+  en: "Requested duration"
+  fr: "Durée demandée"
+history.meta.max_iterations:
+  en: "Max iterations"
+  fr: "Itérations max"
+
+# ---------------------------------------------------------------------------
+# Rapport (carte de synthèse)
+# ---------------------------------------------------------------------------
+report.reports:
+  en: "Reports"
+  fr: "Rapports"
+report.summary:
+  en: "Summary"
+  fr: "Résumé"
+report.thresholds:
+  en: "Thresholds"
+  fr: "Seuils"
+report.steps:
+  en: "Steps"
+  fr: "Étapes"
+report.checks:
+  en: "Checks"
+  fr: "Checks"
+report.no_report:
+  en: "No report written for this run."
+  fr: "Aucun rapport écrit pour cette exécution."
+report.default_name:
+  en: "report"
+  fr: "rapport"
+report.column.step:
+  en: "Step"
+  fr: "Étape"
+report.column.requests:
+  en: "Requests"
+  fr: "Requêtes"
+report.column.average:
+  en: "Average"
+  fr: "Moyenne"
+report.column.errors:
+  en: "Errors"
+  fr: "Erreurs"
+
+# ---------------------------------------------------------------------------
+# Onglet Lancer
+# ---------------------------------------------------------------------------
+run.scenarios_header:
+  en: "Scenarios"
+  fr: "Scénarios"
+run.empty.title:
+  en: "No scenario to run"
+  fr: "Aucun scénario à lancer"
+run.empty.subtitle:
+  en: "Create a scenario, then come back here to load-test it."
+  fr: "Créez un scénario, puis revenez ici pour le tester en charge."
+run.load_profile:
+  en: "Load profile"
+  fr: "Profil de charge"
+run.plan_preview:
+  en: "Plan preview"
+  fr: "Aperçu du plan"
+run.defaults:
+  en: "Defaults: %{defaults}"
+  fr: "Valeurs par défaut : %{defaults}"
+run.field.tps:
+  en: "Iterations per second"
+  fr: "Itérations par seconde"
+run.field.max_vus:
+  en: "Max VUs (optional)"
+  fr: "VUs max (optionnel)"
+run.field.ramp_up:
+  en: "Ramp-up (default 60s)"
+  fr: "Montée (défaut 60s)"
+run.field.ramp_down:
+  en: "Ramp-down (default 30s)"
+  fr: "Descente (défaut 30s)"
+run.field.max_iterations:
+  en: "Max iterations (optional)"
+  fr: "Itérations max (optionnel)"
+run.log:
+  en: "Log"
+  fr: "Journal"
+run.log_lines:
+  en: "%{count} line(s)"
+  fr: "%{count} ligne(s)"
+run.log_empty:
+  en: "The log will appear here when the test starts."
+  fr: "Le journal apparaîtra ici au lancement du test."
+
+# ---------------------------------------------------------------------------
+# Graphiques
+# ---------------------------------------------------------------------------
+chart.throughput:
+  en: "Throughput"
+  fr: "Débit"
+chart.latency_p95:
+  en: "p95 latency"
+  fr: "Latence p95"
+chart.errors:
+  en: "Errors"
+  fr: "Erreurs"
+chart.vus:
+  en: "VUs"
+  fr: "VUs"
+chart.waiting:
+  en: "waiting"
+  fr: "en attente"
+chart.min_max:
+  en: "min %{min} · max %{max}"
+  fr: "min %{min} · max %{max}"
+chart.empty_hint:
+  en: "Curves will appear during the test."
+  fr: "Les courbes apparaîtront pendant le test."
+
+# ---------------------------------------------------------------------------
+# Scénarios
+# ---------------------------------------------------------------------------
+scenario.header:
+  en: "Scenarios"
+  fr: "Scénarios"
+scenario.empty.title:
+  en: "No scenario selected"
+  fr: "Aucun scénario sélectionné"
+scenario.empty.subtitle:
+  en: "Pick a scenario in the tree or create a new one."
+  fr: "Choisissez un scénario dans l'arbre ou créez-en un nouveau."
+scenario.tab.general:
+  en: "General"
+  fr: "Général"
+scenario.tab.steps:
+  en: "Steps (%{count})"
+  fr: "Étapes (%{count})"
+scenario.tab.advanced:
+  en: "Advanced"
+  fr: "Avancé"
+scenario.tab.curl:
+  en: "Import curl"
+  fr: "Import curl"
+scenario.copy_name:
+  en: "%{name} (copy)"
+  fr: "%{name} (copie)"
+scenario.general:
+  en: "General"
+  fr: "Général"
+scenario.field.base_url:
+  en: "Base URL"
+  fr: "URL de base"
+scenario.field.description:
+  en: "Description"
+  fr: "Description"
+scenario.field.authentication:
+  en: "Authentication"
+  fr: "Authentification"
+scenario.advanced:
+  en: "Advanced"
+  fr: "Avancé"
+scenario.field.think_time:
+  en: "Pause between transactions (s)"
+  fr: "Pause entre transactions (s)"
+scenario.field.threshold_p95:
+  en: "p95 threshold (ms)"
+  fr: "Seuil p95 (ms)"
+scenario.field.threshold_p99:
+  en: "p99 threshold (ms)"
+  fr: "Seuil p99 (ms)"
+scenario.field.threshold_errors:
+  en: "Max errors (%)"
+  fr: "Erreurs max (%)"
+scenario.field.threshold_checks:
+  en: "Min checks (%)"
+  fr: "Checks min (%)"
+scenario.field.variables:
+  en: "Variables (name | value1, value2)"
+  fr: "Variables (nom | valeur1, valeur2)"
+scenario.insecure_tls:
+  en: "Ignore TLS certificate errors"
+  fr: "Ignorer les erreurs de certificat TLS"
+scenario.insecure_tls_hint:
+  en: "Only use in staging with self-signed certificates."
+  fr: "À n'utiliser qu'en préproduction avec des certificats auto-signés."
+scenario.dangerous:
+  en: "Real effects (purchase, creation…)"
+  fr: "Effets réels (achat, création…)"
+scenario.dangerous_hint:
+  en: "Requires explicit confirmation before each run."
+  fr: "Exige une confirmation explicite avant chaque lancement."
+scenario.curl.title:
+  en: "Import a curl command"
+  fr: "Importer une commande curl"
+scenario.curl.hint:
+  en: "Copy a request from the browser, Postman or SoapUI."
+  fr: "Copiez une requête depuis le navigateur, Postman ou SoapUI."
+scenario.curl.base_url_hint:
+  en: "The base URL is filled in if it is still empty."
+  fr: "L'URL de base est renseignée si elle est encore vide."
+
+# ---------------------------------------------------------------------------
+# Étapes
+# ---------------------------------------------------------------------------
+step.header:
+  en: "Steps"
+  fr: "Étapes"
+step.empty:
+  en: "No steps. Add one or import a curl command."
+  fr: "Aucune étape. Ajoutez-en une ou importez un curl."
+step.default_name:
+  en: "Step %{index}"
+  fr: "Étape %{index}"
+step.editor_title:
+  en: "Step %{index}"
+  fr: "Étape %{index}"
+step.field.name:
+  en: "Name"
+  fr: "Nom"
+step.field.soap_version:
+  en: "SOAP version"
+  fr: "Version SOAP"
+step.field.soap_action:
+  en: "SOAPAction"
+  fr: "SOAPAction"
+step.soap_hint:
+  en: "The SOAP body is generated automatically when you choose SOAP with an empty body, or when you change version while the body is still the template."
+  fr: "Le corps SOAP est généré automatiquement quand vous choisissez SOAP avec un corps vide, ou quand vous changez de version si le corps est encore le modèle."
+step.field.expected_status:
+  en: "Expected statuses (comma-separated)"
+  fr: "Statuts attendus (séparés par des virgules)"
+step.field.p95:
+  en: "Step p95 threshold (ms)"
+  fr: "Seuil p95 de l'étape (ms)"
+step.field.headers:
+  en: "Headers (Key: value)"
+  fr: "En-têtes (Clé: valeur)"
+step.field.body:
+  en: "Request body"
+  fr: "Corps de la requête"
+step.field.checks:
+  en: "Checks (path | operation | value)"
+  fr: "Checks (chemin | opération | valeur)"
+step.field.extract:
+  en: "Extractions (name | path)"
+  fr: "Extractions (nom | chemin)"
+step.stop_on_failure:
+  en: "Stop the transaction if this step fails"
+  fr: "Arrêter la transaction si cette étape échoue"
+
+step.result.title:
+  en: "Result"
+  fr: "Résultat"
+step.result.running:
+  en: "Testing…"
+  fr: "Test en cours…"
+step.result.no_checks:
+  en: "No checks defined."
+  fr: "Aucun check défini."
+step.result.sent_headers:
+  en: "Sent headers"
+  fr: "En-têtes envoyés"
+step.result.checks:
+  en: "Checks"
+  fr: "Checks"
+step.result.response_body:
+  en: "Response body"
+  fr: "Corps de la réponse"

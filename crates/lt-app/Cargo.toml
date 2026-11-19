@@ -1,0 +1,25 @@
+[package]
+name = "lt-app"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "load-testing"
+path = "src/main.rs"
+
+[dependencies]
+lt-core.workspace = true
+lt-engine.workspace = true
+gpui = { version = "=0.2.2", features = ["runtime_shaders"] }
+gpui-component = "=0.5.0"
+chrono.workspace = true
+rust-i18n.workspace = true
+serde_json.workspace = true
+tokio = { workspace = true, features = ["rt", "sync", "time"] }
+tokio-util.workspace = true
+rfd.workspace = true
+anyhow.workspace = true
+
+[build-dependencies]
+winresource = "0.1"

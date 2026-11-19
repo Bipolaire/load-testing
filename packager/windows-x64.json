@@ -1,0 +1,19 @@
+{
+  "$schema": "https://raw.githubusercontent.com/crabnebula-dev/cargo-packager/main/crates/packager/schema.json",
+  "productName": "Load Testing",
+  "version": "0.1.0",
+  "identifier": "com.loadtesting.desktop",
+  "description": "Tests de charge HTTP natifs (REST et SOAP)",
+  "authors": ["Load Testing"],
+  "category": "DeveloperTool",
+  "icons": ["assets/icon.ico", "assets/icon.png", "assets/icon@2x.png"],
+  "binaries": [{ "path": "load-testing", "main": true }, { "path": "lt" }],
+  "outDir": "dist",
+  "binariesDir": "target/x86_64-pc-windows-msvc/release",
+  "targetTriple": "x86_64-pc-windows-msvc",
+  "formats": ["nsis"],
+  "nsis": {
+    "installMode": "currentUser",
+    "languages": ["French", "English"]
+  }
+}

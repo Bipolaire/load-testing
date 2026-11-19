@@ -1,0 +1,18 @@
+{
+  "$schema": "https://raw.githubusercontent.com/crabnebula-dev/cargo-packager/main/crates/packager/schema.json",
+  "productName": "Load Testing",
+  "version": "0.1.0",
+  "identifier": "com.loadtesting.desktop",
+  "description": "Tests de charge HTTP natifs (REST et SOAP)",
+  "authors": ["Load Testing"],
+  "category": "DeveloperTool",
+  "icons": ["assets/icon.png", "assets/icon@2x.png"],
+  "binaries": [{ "path": "load-testing", "main": true }, { "path": "lt" }],
+  "outDir": "dist",
+  "binariesDir": "target/x86_64-apple-darwin/release",
+  "targetTriple": "x86_64-apple-darwin",
+  "formats": ["app", "dmg"],
+  "macos": {
+    "minimumSystemVersion": "13.0"
+  }
+}
