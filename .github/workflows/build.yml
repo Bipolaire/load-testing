@@ -19,7 +19,7 @@ jobs:
     name: Tests et clippy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - uses: dtolnay/rust-toolchain@stable
       - uses: Swatinem/rust-cache@v2
       - run: cargo test -p lt-core -p lt-engine -p lt-cli
@@ -33,11 +33,11 @@ jobs:
       matrix:
         include:
           - name: macOS ARM64
-            os: macos-14
+            os: macos-15
             target: aarch64-apple-darwin
             config: macos-arm64
           - name: macOS Intel
-            os: macos-14
+            os: macos-15
             target: x86_64-apple-darwin
             config: macos-x64
           - name: Windows x64
@@ -46,7 +46,7 @@ jobs:
             config: windows-x64
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: dtolnay/rust-toolchain@stable
         with:
@@ -109,12 +109,12 @@ jobs:
             archive: tar.gz
             musl: true
           - name: macOS ARM64
-            os: macos-14
+            os: macos-15
             target: aarch64-apple-darwin
             archive: tar.gz
             musl: false
           - name: macOS Intel
-            os: macos-14
+            os: macos-15
             target: x86_64-apple-darwin
             archive: tar.gz
             musl: false
@@ -125,7 +125,7 @@ jobs:
             musl: false
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - uses: dtolnay/rust-toolchain@stable
         with:
